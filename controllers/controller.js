@@ -65,6 +65,9 @@ function validaPlate(plate) {
         alert("La matrícula ha de tenir 7 caràcters");
     }
     else {
+        /*Per comprobar si elcaracter es una lletro o un numero, ho passo a codi ASCII per tal de poder
+        identificar quin es el caracter que falla la expressió regular seria aixi:
+        /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g             */
         for (var i = 0; i < 7; i++) {
             var numCaracter = i + 1;
             var caracter = plate.charCodeAt(i);

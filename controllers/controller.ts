@@ -37,7 +37,6 @@ function addWheels(){
 
         if(!(isNaN(parseInt(inputsRoda[i+1].value)))){
             diametre = parseInt(inputsRoda[i+1].value);
-
             if(diametre < 0.4 || diametre > 2){
                 correcte = false;
                 alert('El diametre de la roda ' + numRoda + ' no te un diàmetre entre 0.4 i 2.')
@@ -45,7 +44,6 @@ function addWheels(){
                 let wheel = new Wheel(diametre, inputsRoda[i].value);
                 arrayRodes.push(wheel);
             }
-
         }else{
             alert('El diametre de la roda ' + numRoda + ' no és un número.')
             correcte = false;
@@ -70,11 +68,13 @@ function addWheels(){
 
 function validaPlate(plate:string){
     var valida:Boolean = true;
-
     if(!(plate.length == 7)){
         valida = false;
-        alert("La matrícula ha de tenir 7 caràcters")
+        alert("La matrícula ha de tenir 7 caràcters");
     }else{
+            /*Per comprobar si elcaracter es una lletro o un numero, ho passo a codi ASCII per tal de poder
+            identificar quin es el caracter que falla la expressió regular seria aixi:
+            /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g             */
         for(let i:number = 0; i<7; i++){
             let numCaracter:number = i+1;
             let caracter:number = plate.charCodeAt(i);
