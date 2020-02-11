@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    </head>
+
+    <style>
+    
+    #hiddenRodes{
+        display:none;
+    }
+
+    body{
+        background-color: darkturquoise;
+    }
+
+    </style>
+
+    <body>
+
+        <div class="container">
+
+            <div class="row mt-4">
+                <div class="col-md-3 mt-2">
+                    <label for="plate">Plate:</label>
+                    <input type="text" id="plate">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <label for="brand">Brand:</label>
+                    <input type="text" id="brand">
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <label for="color">Color:</label>
+                    <input type="text" id="color">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success" onclick="createCar()">Create car</button>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <p><u>Car</u></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label id="lblPlate">Plate:</label>
+                </div>
+                <div class="col-md-2">
+                    <label id="lblBrand">Brand:</label>
+                </div>
+                <div class="col-md-2">
+                    <label id="lblColor">Color:</label>
+                </div>
+            </div>
+
+            <hr>
+
+            <div id="hiddenRodes">
+                <div class="row mt-2">
+                    <div class="col-md-3">
+                        <label for="marca1">Marca roda 1:</labelclass="roda">
+                        <input class="inputsRoda" type="text" id="marca1">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="diam1">Diàmetre roda 1:</label>
+                        <input class="inputsRoda" type="text" id="diam1">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="marca2">Marca roda 2:</label>
+                        <input class="inputsRoda" type="text" id="marca2">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="diam2">Diàmetre roda 2:</label>
+                        <input class="inputsRoda" type="text" id="diam2">
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-3">
+                        <label for="marca3">Marca roda 3:</label>
+                        <input class="inputsRoda" type="text" id="marca3">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="diam3">Diàmetre roda 3:</label>
+                        <input class="inputsRoda" type="text" id="diam3">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="marca4">Marca roda 4:</label>
+                        <input class="inputsRoda" type="text" id="marca4">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="diam4">Diàmetre roda 4:</label>
+                        <input class="inputsRoda" type="text" id="diam4">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 mt-2">
+                        <button type="button" class="btn btn-success" onclick="addWheels()">Add wheels</button>
+                    </div>  
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <p><u>Wheels</u></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblMarca1">Brand wheel 1:</labelclass="inputRoda">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblMarca2">Brand wheel 2:</label class="labelsRoda">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblMarca3">Brand wheel 3:</label class="labelsRoda">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblMarca4">Brand wheel 4:</label class="labelsRoda">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblDiam1">Diameter wheel 1:</label class="labelsRoda">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblDiam2">Diameter wheel 2:</label class="labelsRoda">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblDiam3">Diameter wheel 3:</label class="labelsRoda">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="labelsRoda" id="lblDiam4">Diameter wheel 4:</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <script src="../models/car.js"></script>
+        <script src="../models/wheel.js"></script>
+        <script src="../controllers/controller.js"></script>
+
+    </body>
+</html>
