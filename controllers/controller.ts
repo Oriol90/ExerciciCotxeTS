@@ -28,41 +28,40 @@ function addWheels(){
 
     const inputsRoda = (<HTMLCollectionOf<HTMLInputElement>>document.getElementsByClassName('inputsRoda'));
     const labelsRoda = (<HTMLCollectionOf<HTMLLabelElement>>document.getElementsByClassName('labelsRoda'));
+    let mapaRodes = new Map();
 
-    for(var i:number = 0; i<8; i=i+2){
-        var diametre:number = 0;
-        var numRoda:number = i/2+1;
-        var correcte:Boolean = true;
-        var arrayRodes:Wheel[] = new Array();
 
+    for(let i:number = 0; i<8; i=i+2){
+        let diametre:number = 0;
+        let numRoda:number = i/2+1;
+        labelsRoda[numRoda].innerText = "Brand wheel " + numRoda + ": ";
+        labelsRoda[numRoda+3].innerText = "Diameter wheel " + numRoda + ": ";
+        
         if(!(isNaN(parseInt(inputsRoda[i+1].value)))){
-            diametre = parseInt(inputsRoda[i+1].value);
+            diametre = parseFloat(inputsRoda[i+1].value);
             if(diametre < 0.4 || diametre > 2){
-                correcte = false;
-                alert('El diametre de la roda ' + numRoda + ' no te un diàmetre entre 0.4 i 2.')
+                alert('El diametre de la roda ' + numRoda + ' no te un diàmetre entre 0.4 i 2.');
             }else{
                 let wheel = new Wheel(diametre, inputsRoda[i].value);
-                arrayRodes.push(wheel);
+                mapaRodes.set(wheel, numRoda);
             }
         }else{
-            alert('El diametre de la roda ' + numRoda + ' no és un número.')
-            correcte = false;
-        }
-
-        if(correcte){
-            for(var z:number = 0; z<arrayRodes.length; z++){
-                car.addWheel(arrayRodes[z]);
-            }
-        }
-        
+            alert('El diametre de la roda ' + numRoda + ' no és un número.');
+        }      
     }
 
-    for(var x:number = 0; x<4; x++){
+    mapaRodes.forEach((key,value) => {
+        car.addWheel(value);
+        labelsRoda[key-1].innerText = "Brand wheel " + key + ": " + value.brand;
+        labelsRoda[key+3].innerText = "Diameter wheel " + key + ": " + value.diameter;
+    });
+
+/*     for(var x:number = 0; x<addWheels.length; x++){
         var roda:Wheel = car.wheels[x];
         var numRoda:number = x+1;
         labelsRoda[x].innerText = "Brand wheel " + numRoda + ": " + roda.brand;
         labelsRoda[x+4].innerText = "Diameter wheel " + numRoda + ": " + roda.diameter;
-    }
+    } */
 
 }
 
@@ -72,9 +71,15 @@ function validaPlate(plate:string){
         valida = false;
         alert("La matrícula ha de tenir 7 caràcters");
     }else{
-            /*Per comprobar si elcaracter es una lletro o un numero, ho passo a codi ASCII per tal de poder
+            
+        var pattern = /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g;
+        if(!(plate.search(pattern) == 0)){
+            alert("La matrícla ha de constar de 4 lletres seguides de 3 números.");
+            valida = false;
+        }
+
+        /*Per comprobar si elcaracter es una lletro o un numero, ho passo a codi ASCII per tal de poder
             identificar quin es el caracter que falla la expressió regular seria aixi:
-            /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g             */
         for(let i:number = 0; i<7; i++){
             let numCaracter:number = i+1;
             let caracter:number = plate.charCodeAt(i);
@@ -89,7 +94,7 @@ function validaPlate(plate:string){
                     alert("El caracter " + numCaracter + " de la matrícula ha de ser un número.");
                 }
             }    
-        }
+        }*/
     }
     return valida;
 }

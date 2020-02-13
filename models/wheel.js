@@ -1,8 +1,7 @@
 "use strict";
-var Wheel = /** @class */ (function () {
-    function Wheel(diameter, brand) {
+class Wheel {
+    constructor(diameter, brand) {
         this.diameter = diameter;
         this.brand = brand;
     }
-    return Wheel;
-}());
+}

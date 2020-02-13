@@ -1,13 +1,13 @@
 "use strict";
 var car;
 function createCar() {
-    var hiddenRodes = document.getElementById('hiddenRodes');
-    var lblColor = document.getElementById('lblColor');
-    var lblMarca = document.getElementById('lblBrand');
-    var lblPlate = document.getElementById('lblPlate');
-    var color = document.getElementById('color').value;
-    var brand = document.getElementById('brand').value;
-    var plate = document.getElementById('plate').value;
+    const hiddenRodes = document.getElementById('hiddenRodes');
+    const lblColor = document.getElementById('lblColor');
+    const lblMarca = document.getElementById('lblBrand');
+    const lblPlate = document.getElementById('lblPlate');
+    const color = document.getElementById('color').value;
+    const brand = document.getElementById('brand').value;
+    const plate = document.getElementById('plate').value;
     if (validaPlate(plate)) {
         car = new Car(plate, color, brand);
         lblColor.innerText = "Color: " + car.color;
@@ -23,40 +23,39 @@ function createCar() {
     }
 }
 function addWheels() {
-    var inputsRoda = document.getElementsByClassName('inputsRoda');
-    var labelsRoda = document.getElementsByClassName('labelsRoda');
-    for (var i = 0; i < 8; i = i + 2) {
-        var diametre = 0;
-        var numRoda = i / 2 + 1;
-        var correcte = true;
-        var arrayRodes = new Array();
+    const inputsRoda = document.getElementsByClassName('inputsRoda');
+    const labelsRoda = document.getElementsByClassName('labelsRoda');
+    let mapaRodes = new Map();
+    for (let i = 0; i < 8; i = i + 2) {
+        let diametre = 0;
+        let numRoda = i / 2 + 1;
+        labelsRoda[numRoda].innerText = "Brand wheel " + numRoda + ": ";
+        labelsRoda[numRoda + 3].innerText = "Diameter wheel " + numRoda + ": ";
         if (!(isNaN(parseInt(inputsRoda[i + 1].value)))) {
-            diametre = parseInt(inputsRoda[i + 1].value);
+            diametre = parseFloat(inputsRoda[i + 1].value);
             if (diametre < 0.4 || diametre > 2) {
-                correcte = false;
                 alert('El diametre de la roda ' + numRoda + ' no te un diàmetre entre 0.4 i 2.');
             }
             else {
-                var wheel = new Wheel(diametre, inputsRoda[i].value);
-                arrayRodes.push(wheel);
+                let wheel = new Wheel(diametre, inputsRoda[i].value);
+                mapaRodes.set(wheel, numRoda);
             }
         }
         else {
             alert('El diametre de la roda ' + numRoda + ' no és un número.');
-            correcte = false;
-        }
-        if (correcte) {
-            for (var z = 0; z < arrayRodes.length; z++) {
-                car.addWheel(arrayRodes[z]);
-            }
         }
     }
-    for (var x = 0; x < 4; x++) {
-        var roda = car.wheels[x];
-        var numRoda = x + 1;
-        labelsRoda[x].innerText = "Brand wheel " + numRoda + ": " + roda.brand;
-        labelsRoda[x + 4].innerText = "Diameter wheel " + numRoda + ": " + roda.diameter;
-    }
+    mapaRodes.forEach((key, value) => {
+        car.addWheel(value);
+        labelsRoda[key - 1].innerText = "Brand wheel " + key + ": " + value.brand;
+        labelsRoda[key + 3].innerText = "Diameter wheel " + key + ": " + value.diameter;
+    });
+    /*     for(var x:number = 0; x<addWheels.length; x++){
+            var roda:Wheel = car.wheels[x];
+            var numRoda:number = x+1;
+            labelsRoda[x].innerText = "Brand wheel " + numRoda + ": " + roda.brand;
+            labelsRoda[x+4].innerText = "Diameter wheel " + numRoda + ": " + roda.diameter;
+        } */
 }
 function validaPlate(plate) {
     var valida = true;
@@ -65,25 +64,28 @@ function validaPlate(plate) {
         alert("La matrícula ha de tenir 7 caràcters");
     }
     else {
+        var pattern = /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g;
+        if (!(plate.search(pattern) == 0)) {
+            alert("La matrícla ha de constar de 4 lletres seguides de 3 números.");
+            valida = false;
+        }
         /*Per comprobar si elcaracter es una lletro o un numero, ho passo a codi ASCII per tal de poder
-        identificar quin es el caracter que falla la expressió regular seria aixi:
-        /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g             */
-        for (var i = 0; i < 7; i++) {
-            var numCaracter = i + 1;
-            var caracter = plate.charCodeAt(i);
-            if (i < 4) {
-                if (!(caracter > 64 && caracter < 91) && !(caracter > 96 && caracter < 123)) {
+            identificar quin es el caracter que falla la expressió regular seria aixi:
+        for(let i:number = 0; i<7; i++){
+            let numCaracter:number = i+1;
+            let caracter:number = plate.charCodeAt(i);
+            if(i < 4){
+                if(!(caracter > 64 && caracter < 91 ) && !(caracter > 96 && caracter < 123)){
                     valida = false;
                     alert("El caracter " + numCaracter + " de la matrícula ha de ser una lletra.");
                 }
-            }
-            else {
-                if (!(caracter > 47 && caracter < 58)) {
+            }else{
+                if(!(caracter > 47 && caracter < 58 )){
                     valida = false;
                     alert("El caracter " + numCaracter + " de la matrícula ha de ser un número.");
                 }
             }
-        }
+        }*/
     }
     return valida;
 }
