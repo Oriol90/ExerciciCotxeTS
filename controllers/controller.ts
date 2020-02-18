@@ -72,7 +72,7 @@ function validaPlate(plate:string){
         alert("La matrícula ha de tenir 7 caràcters");
     }else{
             
-        var pattern = /[A-Z|a-z][A-Z|a-z][A-Z|a-z][A-Z|a-w][0-9][0-9][0-9]/g;
+        var pattern = /[A-Z|a-z]{4}[0-9]{3}/g;
         if(!(plate.search(pattern) == 0)){
             alert("La matrícla ha de constar de 4 lletres seguides de 3 números.");
             valida = false;
